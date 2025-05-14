@@ -301,6 +301,8 @@ footer {
   border-top: 5px solid #c7d2fe;
 }
 
+/* Responsive GUI */
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
