@@ -31,7 +31,6 @@ html {
   font-weight: bold;
   font-size: 24px;
   color: #ffffff;
-  padding-left: 180px;
 }
 
 .nav-right {
@@ -41,7 +40,6 @@ html {
   gap: 2rem;
   list-style: none;
   margin: 0;
-  padding-right: 150px;
 }
 
 .nav-right a {
