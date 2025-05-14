@@ -34,6 +34,11 @@ html {
   padding-left: 180px;
 }
 
+.nav-title a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .nav-right {
   flex: 1;
   display: flex;
