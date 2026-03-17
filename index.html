@@ -1,144 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mohamad Ghattas - Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="images/icon.png" type="image/x-icon" />
-  <script src="scripts.js"></script>
+  <title>Mohamad Ghattas — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" href="images/icon.png" type="image/x-icon"/>
 </head>
 <body>
 
-  <nav class="navbar">      
-    <div class="nav-left">
-      <span class="nav-title"><a href="https://mohamadghattasportfolio.netlify.app/">My Portfolio</a></span>
+  <!-- ── LOADER ── -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">MG<span class="loader-blink">_</span></div>
+      <div class="loader-bar-track"><div class="loader-bar" id="loaderBar"></div></div>
+      <div class="loader-msg" id="loaderMsg">BOOTING SYSTEM...</div>
     </div>
-    <ul class="nav-right">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>      
+    <div class="loader-grid"></div>
+  </div>
 
-  <header>
-    <div class="header-container">
-      <div class="header-image">
-        <img src="images/AI.png" alt="AI Image" />
+  <!-- ── CUSTOM CURSOR ── -->
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
+
+  <!-- ── NOISE TEXTURE ── -->
+  <div class="noise"></div>
+
+  <!-- ── SCROLL PROGRESS ── -->
+  <div id="prog-bar"></div>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="nav">
+    <a href="#home" class="nav-brand">MG<span class="blink">_</span></a>
+    <div class="nav-center" id="navCenter">
+      <a href="#home"     class="nl active">Home</a>
+      <a href="#about"    class="nl">About</a>
+      <a href="#skills"   class="nl">Skills</a>
+      <a href="#projects" class="nl">Projects</a>
+      <a href="#contact"  class="nl">Contact</a>
+    </div>
+    <div class="nav-end">
+      <span id="navClock" class="nav-clock"></span>
+      <button class="burger" id="burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mob-menu" id="mobMenu">
+    <a href="#home"     class="mob-link">Home</a>
+    <a href="#about"    class="mob-link">About</a>
+    <a href="#skills"   class="mob-link">Skills</a>
+    <a href="#projects" class="mob-link">Projects</a>
+    <a href="#contact"  class="mob-link">Contact</a>
+  </div>
+
+  <!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
+  <section id="home">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero">
+      <div class="hero-eyebrow">SOFTWARE ENGINEERING STUDENT · UNIVERSITY OF CALGARY</div>
+      <h1 class="hero-name" id="heroName" data-text="Mohamad Ghattas">Mohamad Ghattas</h1>
+      <div class="hero-sub">
+        <span class="sub-static">I build&nbsp;</span>
+        <span id="typeText" class="type-accent"></span><span class="type-cur">|</span>
       </div>
-      <div class="header-text">
-        <h1>Hey, I'm Mohamad Ghattas</h1>
-        <p>Welcome to my personal portfolio! I'm a 4th Year Software Engineering Student.</p>
+      <p class="hero-p">4th Year Software Engineering student passionate about building<br>practical solutions that make real-world impact.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="cta-primary mag">View Projects</a>
+        <a href="#contact"  class="cta-ghost  mag">Get In Touch →</a>
       </div>
     </div>
-  </header>
+    <!-- floating side links -->
+    <div class="side-links">
+      <a href="https://github.com/MohamadG04"                             target="_blank" class="sl">GH</a>
+      <a href="https://www.linkedin.com/in/mohamad-ghattas-1b0613331/"   target="_blank" class="sl">LI</a>
+      <a href="mailto:mohamadghattas04@gmail.com"                                         class="sl">EM</a>
+    </div>
+    <!-- scroll indicator -->
+    <div class="scroll-ind">
+      <span>SCROLL</span>
+      <div class="scroll-track"><div class="scroll-run"></div></div>
+    </div>
+  </section>
 
+  <!-- ═══════════════════════════════ ABOUT ══════════════════════════════ -->
   <section id="about">
-    <div class="about-container">
-      <div class="about-left">
-        <h2>About Me</h2>
-        <img src="images/mecoding.png" alt="Profile photo" class="profile-img">
-      </div>
-      <div class="about-right">
-        <p>
-          I'm a Software Engineering student at the University of Calgary with a strong passion for technology and innovation. 
-          I have experience working with a variety of programming languages and enjoy tackling complex problems through code. 
-          I'm dedicated to continuous learning, effective collaboration, and building practical solutions that make a real-world impact.
-        </p>
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">About Me</h2>
+        <div class="sec-rule"></div>
+      </header>
+
+      <div class="about-grid">
+        <!-- left: image + stats -->
+        <div class="about-left">
+          <div class="img-frame rv-left">
+            <img src="images/mecoding.png" alt="Mohamad Ghattas" class="about-img"/>
+            <div class="img-border"></div>
+            <div class="img-corner tl"></div>
+            <div class="img-corner tr"></div>
+            <div class="img-corner bl"></div>
+            <div class="img-corner br"></div>
+          </div>
+          <div class="stats">
+            <div class="stat rv-up">
+              <span class="stat-n" data-target="4">0</span><sup>th</sup>
+              <span class="stat-l">Year</span>
+            </div>
+            <div class="stat rv-up" style="--d:.1s">
+              <span class="stat-n" data-target="5">0</span><sup>+</sup>
+              <span class="stat-l">Projects</span>
+            </div>
+            <div class="stat rv-up" style="--d:.2s">
+              <span class="stat-n" data-target="10">0</span><sup>+</sup>
+              <span class="stat-l">Languages</span>
+            </div>
+          </div>
+        </div>
+        <!-- right: bio -->
+        <div class="about-right rv-right">
+          <p class="about-lead">Hey! I'm <strong>Mohamad Ghattas</strong> — a Software Engineering student at the <em>University of Calgary</em>.</p>
+          <p>I have a strong passion for technology and innovation, working with a variety of programming languages and tackling complex problems through code.</p>
+          <p>Dedicated to continuous learning, effective collaboration, and building practical solutions that create real-world impact.</p>
+          <div class="chip-row">
+            <span class="chip">Problem Solver</span>
+            <span class="chip">Full Stack</span>
+            <span class="chip">OOP</span>
+            <span class="chip">Collaborator</span>
+            <span class="chip">Clean Code</span>
+          </div>
+          <div class="about-ctas">
+            <a href="#contact"  class="cta-primary mag">Contact Me</a>
+            <a href="#skills"   class="cta-ghost">See My Skills →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-
+  <!-- ═══════════════════════════════ SKILLS ═════════════════════════════ -->
   <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-list">
-      <div class="skill"><h3>Python</h3><img src="images/python.png" alt="Python Logo" class="skill-image" /></div>
-      <div class="skill"><h3>Java</h3><img src="images/java.png" alt="Java Logo" class="skill-image" /></div>
-      <div class="skill"><h3>C</h3><img src="images/c.png" alt="C Logo" class="skill-image" /></div>
-      <div class="skill"><h3>C++</h3><img src="images/c++.png" alt="C++ Logo" class="skill-image" /></div>
-      <div class="skill"><h3>HTML</h3><img src="images/html.png" alt="HTML Logo" class="skill-image" /></div>
-      <div class="skill"><h3>CSS</h3><img src="images/css.png" alt="CSS Logo" class="skill-image" /></div>
-      <div class="skill"><h3>JavaScript</h3><img src="images/javascript.png" alt="JavaScript Logo" class="skill-image" /></div>
-      <div class="skill"><h3>SQL</h3><img src="images/sql.png" alt="SQL Logo" class="skill-image" /></div>
-      <div class="skill"><h3>React</h3><img src="images/react.png" alt="React Logo" class="skill-image" /></div>
-      <div class="skill"><h3>Node.js</h3><img src="images/nodejs.png" alt="Node.js Logo" class="skill-image" /></div>
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Skills</h2>
+        <div class="sec-rule"></div>
+      </header>
+
+      <div class="skills-grid">
+        <div class="sk-card rv-up" style="--d:0s">
+          <img src="images/python.png"     alt="Python"     class="sk-icon"/>
+          <h3>Python</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="90"></div></div>
+          <span class="sk-pct">90%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.05s">
+          <img src="images/java.png"       alt="Java"       class="sk-icon"/>
+          <h3>Java</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="85"></div></div>
+          <span class="sk-pct">85%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.1s">
+          <img src="images/c.png"          alt="C"          class="sk-icon"/>
+          <h3>C</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="75"></div></div>
+          <span class="sk-pct">75%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.15s">
+          <img src="images/c++.png"        alt="C++"        class="sk-icon"/>
+          <h3>C++</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="78"></div></div>
+          <span class="sk-pct">78%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.2s">
+          <img src="images/html.png"       alt="HTML"       class="sk-icon"/>
+          <h3>HTML</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="95"></div></div>
+          <span class="sk-pct">95%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.25s">
+          <img src="images/css.png"        alt="CSS"        class="sk-icon"/>
+          <h3>CSS</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="88"></div></div>
+          <span class="sk-pct">88%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.3s">
+          <img src="images/javascript.png" alt="JavaScript" class="sk-icon"/>
+          <h3>JavaScript</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="85"></div></div>
+          <span class="sk-pct">85%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.35s">
+          <img src="images/sql.png"        alt="SQL"        class="sk-icon"/>
+          <h3>SQL</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="80"></div></div>
+          <span class="sk-pct">80%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.4s">
+          <img src="images/react.png"      alt="React"      class="sk-icon"/>
+          <h3>React</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="75"></div></div>
+          <span class="sk-pct">75%</span>
+        </div>
+        <div class="sk-card rv-up" style="--d:.45s">
+          <img src="images/nodejs.png"     alt="Node.js"    class="sk-icon"/>
+          <h3>Node.js</h3>
+          <div class="sk-track"><div class="sk-fill" data-w="72"></div></div>
+          <span class="sk-pct">72%</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ═════════════════════════════ PROJECTS ═════════════════════════════ -->
   <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-container">
-      <div class="project-left">
-        <h3>Movie Theatre Ticket Reservation App – Java and SQL</h3>
-        <img src="images/movie.png" alt="Movie photo" class="project-img">
-      </div>
-      <div class="project-right"> 
-        <p>Developed a ticket reservation app using Java and SQL. Designed interactive GUIs, synchronized real-time data, and created UML diagrams to define system architecture.</p>
-      </div>
-    </div>
-    <div class="project-container">
-      <div class="project-left">
-        <h3>Disaster Victims Management System – Java</h3>
-        <img src="images/disaster.png" alt="Disaster photo" class="project-img">
-      </div>
-      <div class="project-right">
-        <p>Built an app to manage disaster victims using Java. Applied OOP principles, designed UML diagrams, and validated functionality with test cases.</p>
-      </div>
-    </div>
-    <div class="project-container">
-      <div class="project-left">
-        <h3>E-commerce Website – HTML, CSS, JavaScript</h3>
-        <img src="images/ecommerce.png" alt="E-commerce photo" class="project-img">
-      </div>
-      <div class="project-right">
-        <p>Built a responsive e-commerce site with HTML, CSS, and JavaScript. Developed a functional cart system, and user authentication with JSON-based data storage.</p>
-      </div>
-    </div>
-    <div class="project-container">
-      <div class="project-left">
-        <h3>Flight Menu Application – C++</h3>
-        <img src="images/flight.png" alt="Flight photo" class="project-img">
-      </div>
-      <div class="project-right">
-        <p>Collaborated on a terminal-based flight management system using C++. Implemented data processing with file I/O, input validation, and improved the user interface for better interaction.</p>
-      </div>
-    </div>
-    <div class="project-container">
-      <div class="project-left">
-        <h3>Museum Management System – Python and SQL</h3>
-        <img src="images/museum.png" alt="Museum photo" class="project-img">
-      </div>
-      <div class="project-right">
-        <p>Co-developed a museum management platform using Python and SQL. Handled frontend/backend logic, integrated an SQL database, and implemented role-based login with a clean interface.</p>
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Projects</h2>
+        <div class="sec-rule"></div>
+      </header>
+
+      <div class="proj-grid">
+
+        <article class="proj-card rv-up tilt" style="--d:0s">
+          <div class="proj-num">01</div>
+          <div class="proj-thumb">
+            <img src="images/movie.png"    alt="Movie Ticket App"/>
+            <div class="proj-thumb-veil"></div>
+          </div>
+          <div class="proj-body">
+            <h3>Movie Theatre Ticket Reservation</h3>
+            <p>Interactive GUI app with real-time data sync and UML-architected system design.</p>
+            <div class="proj-tags">
+              <span>Java</span><span>SQL</span><span>GUI</span><span>UML</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card rv-up tilt" style="--d:.08s">
+          <div class="proj-num">02</div>
+          <div class="proj-thumb">
+            <img src="images/disaster.png" alt="Disaster Management"/>
+            <div class="proj-thumb-veil"></div>
+          </div>
+          <div class="proj-body">
+            <h3>Disaster Victims Management System</h3>
+            <p>OOP-driven app to manage disaster victims with full test-case validation suite.</p>
+            <div class="proj-tags">
+              <span>Java</span><span>OOP</span><span>UML</span><span>Testing</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card rv-up tilt" style="--d:.16s">
+          <div class="proj-num">03</div>
+          <div class="proj-thumb">
+            <img src="images/ecommerce.png" alt="E-commerce"/>
+            <div class="proj-thumb-veil"></div>
+          </div>
+          <div class="proj-body">
+            <h3>E-Commerce Website</h3>
+            <p>Responsive shop with cart system, user authentication, and JSON data storage.</p>
+            <div class="proj-tags">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>JSON</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card rv-up tilt" style="--d:.24s">
+          <div class="proj-num">04</div>
+          <div class="proj-thumb">
+            <img src="images/flight.png"   alt="Flight Menu"/>
+            <div class="proj-thumb-veil"></div>
+          </div>
+          <div class="proj-body">
+            <h3>Flight Menu Application</h3>
+            <p>Terminal-based flight system with file I/O, input validation, and polished UX.</p>
+            <div class="proj-tags">
+              <span>C++</span><span>File I/O</span><span>CLI</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card rv-up tilt" style="--d:.32s">
+          <div class="proj-num">05</div>
+          <div class="proj-thumb">
+            <img src="images/museum.png"   alt="Museum System"/>
+            <div class="proj-thumb-veil"></div>
+          </div>
+          <div class="proj-body">
+            <h3>Museum Management System</h3>
+            <p>Full-stack platform with SQL database, role-based login, and clean interface.</p>
+            <div class="proj-tags">
+              <span>Python</span><span>SQL</span><span>Auth</span><span>UI</span>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
+  <!-- ═════════════════════════════ CONTACT ══════════════════════════════ -->
   <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out via Email, LinkedIn, or GitHub!</p>
-    <div class="contact-list">
-      <div class="contact-item">
-        <strong><a href="mailto:mohamadghattas04@gmail.com">Email</a></strong>
-      </div>
-      <div class="contact-item">
-        <strong><a href="mailto:mohamad.ghattas@ucalgary.ca">UCalgary Email</a></strong>
-      </div>
-      <div class="contact-item">
-        <strong><a href="https://www.linkedin.com/in/mohamad-ghattas-1b0613331/" target="_blank">LinkedIn</a></strong>
-      </div>
-      <div class="contact-item">
-        <strong><a href="https://github.com/MohamadG04" target="_blank">GitHub</a></strong>
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Contact</h2>
+        <div class="sec-rule"></div>
+      </header>
+
+      <div class="contact-grid">
+        <!-- left: links -->
+        <div class="contact-left rv-left">
+          <h3 class="contact-headline">Let's Build Something.</h3>
+          <p class="contact-sub">Open to opportunities, collaborations, or just a great conversation about tech.</p>
+
+          <div class="c-links">
+            <a href="mailto:mohamadghattas04@gmail.com" class="c-link mag">
+              <span class="c-ico">✉</span>
+              <span>mohamadghattas04@gmail.com</span>
+              <span class="c-arr">→</span>
+            </a>
+            <a href="mailto:mohamad.ghattas@ucalgary.ca" class="c-link mag">
+              <span class="c-ico">🎓</span>
+              <span>mohamad.ghattas@ucalgary.ca</span>
+              <span class="c-arr">→</span>
+            </a>
+            <a href="https://www.linkedin.com/in/mohamad-ghattas-1b0613331/" target="_blank" class="c-link mag">
+              <span class="c-ico">in</span>
+              <span>LinkedIn Profile</span>
+              <span class="c-arr">→</span>
+            </a>
+            <a href="https://github.com/MohamadG04" target="_blank" class="c-link mag">
+              <span class="c-ico">&lt;/&gt;</span>
+              <span>GitHub Profile</span>
+              <span class="c-arr">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- right: live terminal -->
+        <div class="contact-right rv-right">
+          <div class="terminal">
+            <div class="term-bar">
+              <span class="tb tb-r"></span>
+              <span class="tb tb-y"></span>
+              <span class="tb tb-g"></span>
+              <span class="term-title">terminal — bash</span>
+            </div>
+            <div class="term-body" id="termBody">
+              <div class="t-row">
+                <span class="t-pr">visitor@mg-portfolio:~$</span>
+                <span id="tCmd" class="t-cmd"></span><span class="t-cur">█</span>
+              </div>
+              <div id="tOut"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- footer -->
+    <footer class="footer">
+      <p>© 2025 Mohamad Ghattas &mdash; Built with passion &amp; caffeine</p>
+      <p class="footer-clock">Calgary, AB &nbsp;·&nbsp; <span id="clock"></span></p>
+      <p class="footer-hint">Try the Konami code: ↑↑↓↓←→←→BA</p>
+    </footer>
   </section>
 
-  <footer>
-    <p>© 2025 Mohamad Ghattas — All Rights Reserved</p>
-    Local Time: <span id="clock"></span>
-  </footer>
+  <!-- ── MATRIX EASTER EGG ── -->
+  <div id="matrixOverlay" class="hidden">
+    <canvas id="matrixCanvas"></canvas>
+    <div class="matrix-msg">
+      YOU FOUND THE EASTER EGG
+      <small>Press ESC to exit the Matrix</small>
+    </div>
+  </div>
 
+  <script src="scripts.js"></script>
 </body>
 </html>
