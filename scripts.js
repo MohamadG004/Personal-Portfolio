@@ -259,7 +259,7 @@ function initReveal() {
       // skill bar
       const fill = el.querySelector(".sk-fill");
       if (fill) {
-        setTimeout(() => { fill.style.width = fill.dataset.w + "%"; }, 180);
+        setTimeout(() => { fill.style.width = 100 + "%"; }, 180);
       }
     });
   }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
