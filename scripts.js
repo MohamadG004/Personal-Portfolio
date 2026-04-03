@@ -1,16 +1,3 @@
-/* ═══════════════════════════════════════════════════
-   scripts.js — Mohamad Ghattas Portfolio
-   Features:
-     · Live clock
-     · Scroll progress bar
-     · Navbar scroll state + active link tracking
-     · Hamburger / mobile drawer
-     · Typewriter effect
-     · IntersectionObserver scroll reveals
-     · Animated count-up stats
-═══════════════════════════════════════════════════ */
-
-/* ── CLOCK ── */
 function tick() {
   const el = document.getElementById('clock');
   if (el) el.textContent = new Date().toLocaleTimeString();
@@ -18,7 +5,6 @@ function tick() {
 setInterval(tick, 1000);
 tick();
 
-/* ── SCROLL PROGRESS ── */
 const prog = document.getElementById('prog');
 window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -26,18 +12,14 @@ function onScroll() {
   const scrolled = window.scrollY;
   const total = document.documentElement.scrollHeight - window.innerHeight;
 
-  // Progress bar
   if (prog) prog.style.width = (scrolled / total * 100) + '%';
 
-  // Navbar
   const nav = document.getElementById('nav');
   if (nav) nav.classList.toggle('scrolled', scrolled > 50);
 
-  // Active nav links
   updateActiveLink(scrolled);
 }
 
-/* ── ACTIVE NAV LINK ── */
 const navLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('section[id]');
 
@@ -51,7 +33,6 @@ function updateActiveLink(scrollY) {
   });
 }
 
-/* ── HAMBURGER / MOBILE DRAWER ── */
 const burger = document.getElementById('burger');
 const drawer = document.getElementById('drawer');
 
@@ -119,7 +100,6 @@ function typeStep() {
 
 typeStep();
 
-/* ── SCROLL REVEAL + COUNT-UP ── */
 const revealEls = document.querySelectorAll('.reveal');
 
 const revealObserver = new IntersectionObserver(entries => {
@@ -129,7 +109,6 @@ const revealObserver = new IntersectionObserver(entries => {
     entry.target.classList.add('visible');
     revealObserver.unobserve(entry.target);
 
-    // Trigger count-up if this element (or a child) has data-target
     entry.target.querySelectorAll('.stat-n[data-target]').forEach(numEl => {
       if (numEl.dataset.done) return;
       numEl.dataset.done = '1';
