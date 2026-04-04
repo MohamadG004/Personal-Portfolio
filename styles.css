@@ -565,14 +565,6 @@ section { position: relative; }
   transform: translateY(-5px);
 }
 
-.proj-num {
-  font-family: var(--ff-mono);
-  font-size: .62rem;
-  letter-spacing: .2em;
-  color: var(--muted);
-  padding: 1.75rem 1.75rem .75rem;
-}
-
 .proj-thumb {
   width: 100%;
   aspect-ratio: 16/9;
@@ -620,6 +612,10 @@ section { position: relative; }
   background: var(--accent-lt);
   border: 1px solid var(--accent-md);
   padding: .22rem .65rem;
+}
+
+.fix-num {
+  font-variant-numeric: lining-nums;
 }
 
 /* ═══════════════════════════════════════════
