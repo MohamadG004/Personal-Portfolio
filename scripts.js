@@ -133,3 +133,71 @@ function countUp(el, target) {
     if (current >= target) clearInterval(interval);
   }, 16);
 }
+
+/* ═══════════════════════════════════════════
+   PROJECTS — accordion + modal
+═══════════════════════════════════════════ */
+
+// ── Staggered entrance ──
+const projCards = document.querySelectorAll('.proj-card');
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.setProperty('--delay', `${i * 0.06}s`);
+      entry.target.classList.add('in-view');
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+projCards.forEach(card => cardObserver.observe(card));
+
+
+// ── Modal ──
+const overlay    = document.getElementById('projModalOverlay');
+const closeBtn   = document.getElementById('projModalClose');
+const modalImg   = document.getElementById('projModalImg');
+const modalTitle = document.getElementById('projModalTitle');
+const modalDesc  = document.getElementById('projModalDesc');
+const modalTags  = document.getElementById('projModalTags');
+const modalLink  = document.getElementById('projModalLink');
+
+function openModal(card) {
+  const { title, desc, tags, img, link } = card.dataset;
+
+  modalImg.src             = img   || '';
+  modalImg.alt             = title || '';
+  modalTitle.textContent   = title || '';
+  modalDesc.textContent    = desc  || '';
+
+  modalTags.innerHTML = '';
+  (tags || '').split(',').forEach(tag => {
+    const span = document.createElement('span');
+    span.className   = 'proj-tag';
+    span.textContent = tag.trim();
+    modalTags.appendChild(span);
+  });
+
+  if (link) {
+    modalLink.href = link;
+    modalLink.classList.remove('hidden');
+  } else {
+    modalLink.classList.add('hidden');
+  }
+
+  overlay.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+projCards.forEach(card => card.addEventListener('click', () => openModal(card)));
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
