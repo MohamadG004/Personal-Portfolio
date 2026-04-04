@@ -135,27 +135,62 @@ function countUp(el, target) {
 }
 
 /* ═══════════════════════════════════════════
-   PROJECTS — accordion + modal
+   PROJECTS — 3D tilt + FLIP modal
 ═══════════════════════════════════════════ */
 
-// ── Staggered entrance ──
 const projCards = document.querySelectorAll('.proj-card');
 
+// ── Staggered entrance ──
 const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      entry.target.style.setProperty('--delay', `${i * 0.06}s`);
+      entry.target.style.setProperty('--delay', `${i * 0.08}s`);
       entry.target.classList.add('in-view');
       cardObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.12 });
 
-projCards.forEach(card => cardObserver.observe(card));
+projCards.forEach(card => {
+  cardObserver.observe(card);
 
+  // Add "View project" hint element
+  const hint = document.createElement('div');
+  hint.className = 'proj-card-hint';
+  hint.innerHTML = 'View project <span>→</span>';
+  card.querySelector('.proj-card-content').appendChild(hint);
+});
+
+// ── 3D mouse-follow tilt ──
+projCards.forEach(card => {
+  card.addEventListener('mousemove', handleTilt);
+  card.addEventListener('mouseleave', resetTilt);
+});
+
+function handleTilt(e) {
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const dx = (e.clientX - cx) / (rect.width / 2);   // -1 → +1
+  const dy = (e.clientY - cy) / (rect.height / 2);  // -1 → +1
+
+  const rotX = -dy * 11;
+  const rotY =  dx * 11;
+
+  card.style.transition = 'box-shadow 0.5s, border-color 0.35s';
+  card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-10px) scale(1.025)`;
+}
+
+function resetTilt(e) {
+  const card = e.currentTarget;
+  card.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s, border-color 0.35s';
+  card.style.transform = '';
+}
 
 // ── Modal ──
 const overlay    = document.getElementById('projModalOverlay');
+const modal      = document.getElementById('projModal');
 const closeBtn   = document.getElementById('projModalClose');
 const modalImg   = document.getElementById('projModalImg');
 const modalTitle = document.getElementById('projModalTitle');
@@ -163,13 +198,16 @@ const modalDesc  = document.getElementById('projModalDesc');
 const modalTags  = document.getElementById('projModalTags');
 const modalLink  = document.getElementById('projModalLink');
 
+let activeCard      = null;
+let modalAnimation  = null;
+
 function openModal(card) {
   const { title, desc, tags, img, link } = card.dataset;
 
-  modalImg.src             = img   || '';
-  modalImg.alt             = title || '';
-  modalTitle.textContent   = title || '';
-  modalDesc.textContent    = desc  || '';
+  modalImg.src           = img   || '';
+  modalImg.alt           = title || '';
+  modalTitle.textContent = title || '';
+  modalDesc.textContent  = desc  || '';
 
   modalTags.innerHTML = '';
   (tags || '').split(',').forEach(tag => {
@@ -186,15 +224,87 @@ function openModal(card) {
     modalLink.classList.add('hidden');
   }
 
+  activeCard = card;
+
+  // Record card's position BEFORE showing overlay
+  const cardRect = card.getBoundingClientRect();
+
+  // Show overlay (fades in via CSS)
   overlay.setAttribute('aria-hidden', 'false');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // Reset any leftover transform from a previous close
+  modal.style.transition = 'none';
+  modal.style.transform  = 'none';
+  modal.style.opacity    = '1';
+
+  // FLIP: wait one frame so the modal is at its final centered position,
+  // then compute the inversion transform and animate to identity.
+  requestAnimationFrame(() => {
+    const modalRect = card.getBoundingClientRect(); // reuse to avoid reflow cost
+
+    // Get modal's actual rendered position
+    const mRect = modal.getBoundingClientRect();
+
+    // Scale factors (card size → modal size)
+    const scaleX = cardRect.width  / mRect.width;
+    const scaleY = cardRect.height / mRect.height;
+
+    // Translation (card center → modal center)
+    const cardCX  = cardRect.left + cardRect.width  / 2;
+    const cardCY  = cardRect.top  + cardRect.height / 2;
+    const modalCX = mRect.left    + mRect.width     / 2;
+    const modalCY = mRect.top     + mRect.height    / 2;
+    const dx = cardCX - modalCX;
+    const dy = cardCY - modalCY;
+
+    // Start modal visually at card position (inverted FLIP)
+    modal.style.transition = 'none';
+    modal.style.transform  = `translate(${dx}px, ${dy}px) scale(${scaleX}, ${scaleY})`;
+    modal.style.opacity    = '0.2';
+
+    // Force reflow so the browser registers the start state
+    modal.offsetHeight;
+
+    // Animate to centered final state
+    modal.style.transition = 'transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1)';
+    modal.style.transform  = 'translate(0, 0) scale(1)';
+    modal.style.opacity    = '1';
+  });
 }
 
 function closeModal() {
+  if (!activeCard) {
+    _finishClose();
+    return;
+  }
+
+  const cardRect = activeCard.getBoundingClientRect();
+  const mRect    = modal.getBoundingClientRect();
+
+  const scaleX = cardRect.width  / mRect.width;
+  const scaleY = cardRect.height / mRect.height;
+  const dx     = (cardRect.left + cardRect.width  / 2) - (mRect.left + mRect.width  / 2);
+  const dy     = (cardRect.top  + cardRect.height / 2) - (mRect.top  + mRect.height / 2);
+
+  modal.style.transition = 'transform 0.42s cubic-bezier(0.55, 0, 0.45, 1), opacity 0.32s';
+  modal.style.transform  = `translate(${dx}px, ${dy}px) scale(${scaleX}, ${scaleY})`;
+  modal.style.opacity    = '0';
+
   overlay.classList.remove('open');
+
+  setTimeout(_finishClose, 430);
+}
+
+function _finishClose() {
   overlay.setAttribute('aria-hidden', 'true');
+  overlay.classList.remove('open');
   document.body.style.overflow = '';
+  modal.style.transform = '';
+  modal.style.opacity   = '';
+  modal.style.transition = '';
+  activeCard = null;
 }
 
 projCards.forEach(card => card.addEventListener('click', () => openModal(card)));
