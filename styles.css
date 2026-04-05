@@ -538,6 +538,16 @@ section { position: relative; }
 }
 .sk-item:hover .sk-name { color: var(--text); }
 
+.sk-icon-group {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.sk-icon-group .sk-icon {
+  margin-bottom: 0;
+}
+
 /* ═══════════════════════════════════════════
    PROJECTS — centered 3D card grid
 ═══════════════════════════════════════════ */
@@ -1031,6 +1041,7 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: -2.5rem;
 }
 .footer-copy {
   font-family: var(--ff-mono);
