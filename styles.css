@@ -484,7 +484,7 @@ section { position: relative; }
 ═══════════════════════════════════════════ */
 #experience {
   padding: 8rem 6%;
-  background: var(--surface);
+  background: var(--bg);
 }
 
 .exp-timeline {
@@ -696,7 +696,7 @@ section { position: relative; }
 ═══════════════════════════════════════════ */
 #projects {
   padding: 6rem 6% 8rem;
-  background: var(--bg);
+  background: var(--surface);
 }
 
 .proj-grid {
