@@ -1,6 +1,6 @@
 # 🌟 Personal Portfolio
 
-Welcome to my personal portfolio website - a clean, responsive space to showcase who I am, what I build, and how to get in touch.
+Welcome to my personal portfolio website! A clean, responsive space to showcase who I am, what I build, and how to get in touch.
 
 ## ✨ Live Portfolio
 
@@ -10,8 +10,9 @@ Welcome to my personal portfolio website - a clean, responsive space to showcase
 
 - **Hero section** with a strong introduction and quick links
 - **About section** with a short bio and stats
-- **Skills section** highlighting my core tools and technologies
+- **Experience section** showcasing where I've worked
 - **Projects section** showcasing selected work
+- **Skills section** highlighting my core tools and technologies
 - **Contact section** with Email, GitHub, and LinkedIn links
 
 ## 🛠️ Built With
