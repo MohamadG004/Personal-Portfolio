@@ -17,7 +17,8 @@ Welcome to my personal portfolio website! A clean, responsive space to showcase 
 
 ## 🛠️ Built With
 
-- HTML/CSS
+- HTML
+- CSS
 - JavaScript
 
 ## 🚀 Highlights
