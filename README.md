@@ -31,7 +31,7 @@ Welcome to my personal portfolio website! A clean, responsive space to showcase 
 
 ## 📬 Contact
 
-Feel free to connect through the links on the portfolio page or reach out directly via the contact section.
+Feel free to connect through the links on my portfolio page or reach out directly via the contact section.
 
 ---
 
