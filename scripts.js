@@ -124,7 +124,7 @@ revealEls.forEach(el => revealObserver.observe(el));
 
 function countUp(el, target) {
   const duration = 1200;
-  const step = target / (duration / 24);
+  const step = target / (duration / 16);
   let current = 0;
 
   const interval = setInterval(() => {
