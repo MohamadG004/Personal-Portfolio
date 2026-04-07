@@ -135,7 +135,7 @@ function countUp(el, target) {
 }
 
 /* ═══════════════════════════════════════════
-   PROJECTS — 3D tilt + FLIP modal
+                  PROJECTS
 ═══════════════════════════════════════════ */
 
 const projCards = document.querySelectorAll('.proj-card');
@@ -161,7 +161,7 @@ projCards.forEach(card => {
   card.querySelector('.proj-card-content').appendChild(hint);
 });
 
-// ── 3D mouse-follow tilt ──
+// 3D mouse-follow tilt effect
 projCards.forEach(card => {
   card.addEventListener('mousemove', handleTilt);
   card.addEventListener('mouseleave', resetTilt);
@@ -172,8 +172,8 @@ function handleTilt(e) {
   const rect = card.getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
-  const dx = (e.clientX - cx) / (rect.width / 2);   // -1 → +1
-  const dy = (e.clientY - cy) / (rect.height / 2);  // -1 → +1
+  const dx = (e.clientX - cx) / (rect.width / 2);
+  const dy = (e.clientY - cy) / (rect.height / 2);
 
   const rotX = -dy * 11;
   const rotY =  dx * 11;
@@ -188,7 +188,7 @@ function resetTilt(e) {
   card.style.transform = '';
 }
 
-// ── Modal ──
+// Modal
 const overlay    = document.getElementById('projModalOverlay');
 const modal      = document.getElementById('projModal');
 const closeBtn   = document.getElementById('projModalClose');
@@ -209,10 +209,10 @@ function openModal(card) {
 
   const { title, desc, tags, img, link } = card.dataset;
 
-  modalImg.src           = img || '';
-  modalImg.alt           = title || '';
+  modalImg.src = img || '';
+  modalImg.alt = title || '';
   modalTitle.textContent = title || '';
-  modalDesc.textContent  = desc || '';
+  modalDesc.textContent = desc || '';
 
   modalTags.innerHTML = '';
   if (tags) {
