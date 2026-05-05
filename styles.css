@@ -501,7 +501,7 @@ section { position: relative; }
   position: absolute;
   top: .4rem;
   bottom: 0;
-  left: 148px;
+  left: 164px;
   width: 1px;
   background: var(--border2);
 }
@@ -509,7 +509,7 @@ section { position: relative; }
 /* ── Single entry ── */
 .exp-item {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 160px 1fr;
   gap: 0 3rem;
   padding-bottom: 3.5rem;
   position: relative;
@@ -521,7 +521,7 @@ section { position: relative; }
   content: '';
   position: absolute;
   top: .4rem;
-  left: 144px;
+  left: 160px;
   width: 9px;
   height: 9px;
   border-radius: 50%;
