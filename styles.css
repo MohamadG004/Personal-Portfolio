@@ -509,7 +509,7 @@ section { position: relative; }
 /* ── Single entry ── */
 .exp-item {
   display: grid;
-  grid-template-columns: 148px 1fr;
+  grid-template-columns: 180px 1fr;
   gap: 0 3rem;
   padding-bottom: 3.5rem;
   position: relative;
@@ -553,6 +553,7 @@ section { position: relative; }
   text-transform: uppercase;
   color: var(--muted);
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .exp-type {
